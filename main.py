@@ -52,9 +52,12 @@ binary_bit_mask = str_to_int_convertion(bit_mask_str)  # маска в форм�
 
 
 def number_mask_compare(number, mask):
-    value = number & mask
+    # функция сравнения вводимого числа и маски в десятичном виде
+    # десятичный вид используется т.к функция 'bin' выводит данные в виде строки и битовые операции невозможны
+    # если вывод - 0, то искомый бит - 0, иначе - 1
+    value = 0 if number & mask == 0 else 1
     return value
 
 
 bit_value = number_mask_compare(binary_number, binary_bit_mask)
-print(bit_value)
+print(f"{k}-й бит числа {string_number} равен {bit_value}")
