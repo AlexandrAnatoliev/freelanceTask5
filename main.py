@@ -21,17 +21,17 @@
 # 1. С клавиатуры вводится 32-разрядное целое число a в двоичной системе счисления.
 # **********************************************************************************************************************
 
+
 string_number = str(input("Введите 32-разрядное число в двоичной системе счисления: "))
 
 
-def str_to_int_to_bin_convertion(bin_number):
+def str_to_int_convertion(bin_number):
     # функция для перевода строки в 10-ричное число, а затем в 2-ичное
-    bin_number = int(bin_number, 2)  # перевод строки в 10-ное число из 16 ричное
-    bin_number = bin(bin_number)  # перевод 10-го числа в 2-ичное
+    bin_number = int(bin_number, 2)  # перевод строки в 10-ное число из двоичной строки
     return bin_number
 
 
-binary_number = str_to_int_to_bin_convertion(string_number)
+binary_number = str_to_int_convertion(string_number)  # число в десятичном виде
 
 # А. Вывести k –ый бит числа a. Номер бита предварительно запросить у пользователя.
 
@@ -47,5 +47,14 @@ def mask_create(bit, lenght):
     return bit_mask_string
 
 
-bit_mask_str = mask_create(k, 32)
-print(bit_mask_str)
+bit_mask_str = mask_create(k, 32)  # маска в виде строки
+binary_bit_mask = str_to_int_convertion(bit_mask_str)  # маска в формате десятичного числа
+
+
+def number_mask_compare(number, mask):
+    value = number & mask
+    return value
+
+
+bit_value = number_mask_compare(binary_number, binary_bit_mask)
+print(bit_value)
