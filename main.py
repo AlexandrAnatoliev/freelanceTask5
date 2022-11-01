@@ -88,3 +88,20 @@ print(f"При изменении {k}-ого бита в числе {string_numb
 
 i, j = map(int, input("Введите номера битов, которые необходимо поменять местами: ").split())
 
+i_mask = mask_create(i, 32)  # Маска i - бита в виде строки нулей и еденицы
+i_mask_number = str_to_int_convertion(i_mask)  # маска в виде десятичного числа
+i_mask_value = number_mask_compare(binary_number, i_mask_number)  # значение i-бита заданного числа
+
+j_mask = mask_create(j, 32)
+j_mask_number = str_to_int_convertion(j_mask)
+j_mask_value = number_mask_compare(binary_number, j_mask_number)
+
+if i_mask_value != j_mask_value:
+    i_j_binary_number = bit_xor(binary_number, i_mask_number)
+    i_j_binary_number = bit_xor(i_j_binary_number, j_mask_number)
+else:
+    i_j_binary_number = binary_number
+
+i_j_binary_string = int_to_bin_string_convertion(i_j_binary_number)
+
+print(f"При замене битов {i} и {j} в числе {string_number} местами, искомое число будет: {i_j_binary_string}")
