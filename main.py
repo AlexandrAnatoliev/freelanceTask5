@@ -126,3 +126,20 @@ binary_number_m_zero = binary_number & m_mask  # число с обнуленн�
 string_number_m_zero = int_to_bin_string_convertion(binary_number_m_zero)  # в виде строки '0' и '1'
 
 print(f"При обнулении {m} младших битов в числе {string_number} получим {string_number_m_zero}")
+
+# 2. Дано 2^p разрядное целое число. «Поксорить» все биты этого числа друг с другом.
+# **********************************************************************************************************************
+
+string_number2 = str(input("Введите 2^p-разрядное число в двоичной системе счисления: "))
+binary_number2 = str_to_int_convertion(string_number2)
+string_number2_len = len(string_number2)  # сколькиразрядное число
+binary_number2_xor = str_to_int_convertion(string_number2[:])  # создаю копию числа, а не ссылку на него!
+for i in range(string_number2_len):
+    mask_xor = mask_create(i, string_number2_len)  # маска c '1' в позиции 'i' для XOR числа
+    mask_xor_number = str_to_int_convertion(mask_xor)
+    binary_number2_xor = bit_xor(binary_number2_xor,
+                                 mask_xor_number)  # XORим 'i' бит числа, результат - десятичное число
+# добавляем '0' слева для красоты
+string_number2_xor = int_to_bin_string_convertion(binary_number2_xor)
+# string_number2_xor = string_number2_xor.rjust(11,__fillchar='+')
+print(f"Если 'поксорить' все биты числа {string_number2}, то получим {string_number2_xor}")
