@@ -23,7 +23,7 @@ string_number = str(input("Введите 32-разрядное число в д
 
 
 def str_to_int_convertion(bin_number):
-    # функция для перевода строки в 10-ричное число, а затем в 2-ичное
+    # функция для перевода строки в 10-ричное число
     bin_number = int(bin_number, 2)  # перевод строки в 10-ное число из двоичной строки
     return bin_number
 
@@ -40,7 +40,7 @@ k = int(input("Введите искомый номер бита: "))
 def mask_create(bit, lenght):
     # Функция для создания маски заданной длины из нулей с единицей в заданном месте. Вывод - строка
     bit_mask_list = ['0'] * lenght  # используются символы ('0' и '1') вместо чисел, т.к "join()" не работает с числами
-    bit_mask_list[-bit] = '1'
+    bit_mask_list[-(bit + 1)] = '1'  # счет битов начинается с '0'
     bit_mask_string = ", ".join(bit_mask_list).replace(", ", "")
     return bit_mask_string
 
@@ -60,5 +60,25 @@ def number_mask_compare(number, mask):
 bit_value = number_mask_compare(binary_number, binary_bit_mask)
 print(f"{k}-й бит числа {string_number} равен {bit_value}")
 
+
 # Б. Установить/снять k –ый бит числа a.
 # **********************************************************************************************************************
+def bit_xor(number, mask):
+    # функция для изменения значения битов в числе,отмеченных '1' в маске
+    number_xor = number ^ mask
+    return number_xor
+
+
+num_xor = bit_xor(binary_number, binary_bit_mask)
+
+
+def int_to_bin_string_convertion(number):
+    # функция для перевода десятичного числа в двоичное число (без '0b') в виде строки
+    bin_number = bin(number)
+    bin_number_string = bin_number[2:]
+    return bin_number_string
+
+
+num_xor_string = int_to_bin_string_convertion(num_xor)
+
+print(f"При изменении {k}-ого бита в числе {string_number} получим число {num_xor_string}")
