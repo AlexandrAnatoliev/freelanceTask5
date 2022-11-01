@@ -105,3 +105,24 @@ else:
 i_j_binary_string = int_to_bin_string_convertion(i_j_binary_number)
 
 print(f"При замене битов {i} и {j} в числе {string_number} местами, искомое число будет: {i_j_binary_string}")
+
+# Г. Обнулить младшие m бит.
+# **********************************************************************************************************************
+m = int(input("Введите, сколько битов нужно обнулить: "))
+
+
+def bit_to_zero_mask(bits, lenght):
+    # Функция для создания маски заданной длины из единиц с заданным количеством нулей. Вывод - строка
+    bit_mask_list = ['1'] * lenght  # используются символы ('0' и '1') вместо чисел, т.к "join()" не работает с числами
+    for i in range(bits):
+        bit_mask_list[-(i + 1)] = '0'  # счет битов начинается с '0'
+        bit_mask_string = ", ".join(bit_mask_list).replace(", ", "")
+    return bit_mask_string
+
+
+m_mask_string = bit_to_zero_mask(m, 32)  # Маска с 'm' нулями
+m_mask = str_to_int_convertion(m_mask_string)  # маска в виде десятичного числа
+binary_number_m_zero = binary_number & m_mask  # число с обнуленными 'm' битами в виде десятичного числа
+string_number_m_zero = int_to_bin_string_convertion(binary_number_m_zero)  # в виде строки '0' и '1'
+
+print(f"При обнулении {m} младших битов в числе {string_number} получим {string_number_m_zero}")
