@@ -134,6 +134,7 @@ string_number2 = str(input("Введите 2^p-разрядное число в 
 binary_number2 = str_to_int_convertion(string_number2)
 string_number2_len = len(string_number2)  # сколькиразрядное число
 binary_number2_xor = str_to_int_convertion(string_number2[:])  # создаю копию числа, а не ссылку на него!
+
 for i in range(string_number2_len):
     mask_xor = mask_create(i, string_number2_len)  # маска c '1' в позиции 'i' для XOR числа
     mask_xor_number = str_to_int_convertion(mask_xor)
@@ -143,3 +144,36 @@ for i in range(string_number2_len):
 string_number2_xor = int_to_bin_string_convertion(binary_number2_xor)
 string_number2_xor = string_number2_xor.rjust(string_number2_len, '0')
 print(f"Если 'поксорить' все биты числа {string_number2}, то получим {string_number2_xor}")
+
+
+# 3. Написать методы циклического сдвига в 2^p разрядном целом числе на n бит влево и вправо.
+# **********************************************************************************************************************
+
+def bin_number_shift_left(number, n):
+    # функция для сдвига числа на 'n'битов влево
+    shift_number = number << n
+    return shift_number
+
+
+def bin_number_shift_right(number, n):
+    # функция для сдвига числа на 'n'битов вправо
+    right_number = number >> n
+    return right_number
+
+
+n = int(input("Введите, на сколько битов нужно сдвинуть число: "))
+
+# число после сдвига влево
+shift_number_left = bin_number_shift_left(binary_number2, n)  # в виде десятичного числа
+string_shift_number_left = int_to_bin_string_convertion(shift_number_left)  # двоичного числа
+string_shift_number_left = string_shift_number_left.rjust(string_number2_len, '0')  # добавили нули слева
+
+# число после сдвига вправо
+shift_number_right = bin_number_shift_right(binary_number2, n)  # в виде десятичного числа
+string_shift_number_right = int_to_bin_string_convertion(shift_number_right)  # двоичного числа
+string_shift_number_right = string_shift_number_right.rjust(string_number2_len, '0')  # добавили нули слева
+
+print(f"""Число {binary_number2} примет вид:
+    {string_shift_number_left} - при сдвиге на {n} бит влево
+    {string_shift_number_right} - при сдвиге на {n} бит вправо
+    """)
