@@ -141,5 +141,5 @@ for i in range(string_number2_len):
                                  mask_xor_number)  # XORим 'i' бит числа, результат - десятичное число
 # добавляем '0' слева для красоты
 string_number2_xor = int_to_bin_string_convertion(binary_number2_xor)
-# string_number2_xor = string_number2_xor.rjust(11,__fillchar='+')
+string_number2_xor = string_number2_xor.rjust(string_number2_len, '0')
 print(f"Если 'поксорить' все биты числа {string_number2}, то получим {string_number2_xor}")
